@@ -12,7 +12,7 @@ Este es un proyecto simple de React, creado con Vite y TypeScript, que utiliza T
 
 ## Requisitos
 
-Antes de empezar, asegúrate de tener Node.js y npm (o Yarn) instalados en tu sistema.
+Antes de empezar, asegúrate de tener Node.js y npm instalados en tu sistema.
 
 - Node.js (v18 o superior)
 - npm (v9 o superior) o Yarn (v1.22 o superior)
@@ -31,8 +31,6 @@ Sigue estos pasos para configurar el proyecto localmente:
 2.  Instala las dependencias:
     ```bash
     npm install
-    # o
-    yarn install
     ```
 
 ## Uso
@@ -43,6 +41,4 @@ Para iniciar el servidor de desarrollo:
 
 ```bash
 npm run dev
-# o
-yarn dev
 ```
