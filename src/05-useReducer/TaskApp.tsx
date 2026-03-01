@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 
 import { Plus, Trash2, Check } from 'lucide-react';
 
@@ -6,32 +6,20 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-
-// contrado de cómo debe mostrarse la tarea (todo)
-interface Todo {
-    id: number;
-    text: string;
-    completed: boolean;
-}
+import { getTaskInitialState, taskReducer } from './reducer/taskReducer';
 
 export const TasksApp = () => {
-    const [todos, setTodos] = useState<Todo[]>([]); // la lista de tareas (todo list)
     const [inputValue, setInputValue] = useState(''); // la entrada de tareas
+    // const [todos, setTodos] = useState<Todo[]>([]); // la lista de tareas (todo list)
+
+    const [state, dispatch] = useReducer(taskReducer, getTaskInitialState());
 
     // función para agregar tarea
     const addTodo = () => {
 
         if (inputValue.length === 0) return; // si la nueva tarea ingresada está vacía, no hacer nada.
 
-        // nueva tarea
-        const newTodo: Todo = {
-            id: Date.now(), // no recomendado
-            text: inputValue.trim(),
-            completed: false,
-        }
-
-        // se agrega una nueva lista de tareas (las que ya estaban + la nueva tarea)
-        setTodos([...todos, newTodo]); // NO hay que mutar los datos
+        dispatch({ type: 'ADD_TODO', payload: inputValue });
 
         // se limpia la entrada de tarea
         setInputValue('');
@@ -39,26 +27,10 @@ export const TasksApp = () => {
     };
 
     // función para actualizar tarea
-    const toggleTodo = (id: number) => {
-
-        const updatedTodo = todos.map(todo => {
-            if (todo.id === id) return { ...todo, completed: !todo.completed }
-
-            return todo;
-        });
-
-        setTodos(updatedTodo);
-
-    };
+    const toggleTodo = (id: number) => dispatch({ type: 'TOGGLE_TODO', payload: id });
 
     // función para eliminar tarea
-    const deleteTodo = (id: number) => {
-
-        const updatedTodo = todos.filter(todo => todo.id !== id);
-
-        setTodos(updatedTodo);
-
-    };
+    const deleteTodo = (id: number) => dispatch({ type: 'DELETE_TODO', payload: id });
 
     // función para manejar la entrada mediante el enter 
     const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -67,8 +39,10 @@ export const TasksApp = () => {
 
     };
 
-    const completedCount = todos.filter((todo) => todo.completed).length;
-    const totalCount = todos.length;
+    const { todos, completed: completedCount, length: totalCount } = state;
+
+    // const completedCount = todos.filter((todo) => todo.completed).length;
+    // const totalCount = todos.length;
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-4">
