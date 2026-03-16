@@ -44,9 +44,6 @@ export const TasksApp = () => {
 
   const { todos, completed: completedCount, length: totalCount } = state;
 
-  // const completedCount = todos.filter((todo) => todo.completed).length;
-  // const totalCount = todos.length;
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-4">
       <div className="mx-auto max-w-2xl">
