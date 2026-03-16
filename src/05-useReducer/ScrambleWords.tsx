@@ -2,19 +2,14 @@
 // Es necesario componentes de Shadcn/ui
 // https://ui.shadcn.com/docs/installation/vite
 
-import React, { useReducer, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { SkipForward, Play } from "lucide-react";
-import { set } from "zod/v3";
 import confetti from "canvas-confetti";
 
-import {
-  GAME_WORDS,
-  scrambleWordsReducer,
-} from "./reducer/scrambleWordReducer";
-import { shuffleArray, scrambleWord } from "./reducer/scrambleWordReducer";
+import { scrambleWordsReducer } from "./reducer/scrambleWordReducer";
 import { getInitialState } from "./reducer/scrambleWordReducer";
 
 export const ScrambleWords = () => {
@@ -34,6 +29,18 @@ export const ScrambleWords = () => {
     totalWords,
   } = state;
 
+  useEffect(() => {
+
+    if (points === 0) return;
+
+    confetti({
+      particleCount: 100,
+      spread: 120,
+      origin: { y: 0.6 },
+    })
+
+
+  }, [points]);
 
   const handleGuessSubmit = (e: React.FormEvent) => {
     // Previene el refresh de la página
@@ -42,25 +49,6 @@ export const ScrambleWords = () => {
     dispatch({
       type: "CHECK_ANSWER",
     })
-
-    // // si la palabra es correcta
-    // if (guess === currentWord) {
-    //   confetti({
-    //     particleCount: 100,
-    //     spread: 120,
-    //     origin: { y: 0.6 },
-    //   });
-
-    //   const newPoints = points + 1;
-    //   const newWords = words.slice(1);
-
-    //   setPoints(newPoints);
-    //   setGuess("");
-    //   setWords(newWords);
-    //   setCurrentWord(newWords[0]);
-    //   setScrambledWord(scrambleWord(newWords[0]));
-
-    //   return; // si no se da la condición, se sale.
   }
 
   const handleSkip = () => {
