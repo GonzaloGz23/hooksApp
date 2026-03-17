@@ -13,6 +13,7 @@ import { scrambleWordsReducer } from "./reducer/scrambleWordReducer";
 import { getInitialState } from "./reducer/scrambleWordReducer";
 
 export const ScrambleWords = () => {
+
   const [state, dispatch] = useReducer(scrambleWordsReducer, getInitialState());
 
   const {

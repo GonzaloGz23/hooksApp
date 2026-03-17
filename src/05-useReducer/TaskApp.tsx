@@ -9,8 +9,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getTaskInitialState, taskReducer } from "./reducer/taskReducer";
 
 export const TasksApp = () => {
+
   const [inputValue, setInputValue] = useState(""); // la entrada de tareas
-  // const [todos, setTodos] = useState<Todo[]>([]); // la lista de tareas (todo list)
 
   const [state, dispatch] = useReducer(taskReducer, getTaskInitialState());
 
