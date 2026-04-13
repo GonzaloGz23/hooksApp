@@ -1,9 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 // import { HooksApp } from './HooksApp';
-import { MemoHook } from "./06-memos/MemoHook";
+// import { MemoHook } from "./06-memos/MemoHook";
 import "./index.css";
-import { MemoCounter } from "./06-memos/MemoCounter";
+import { InstagromApp } from "./07-useOptimistic/InstagromApp";
+// import { MemoCounter } from "./06-memos/MemoCounter";
 // import { TrafficLightWhitEffect } from './02-useEffect/TrafficLightWhitEffect';
 // import { TrafficLightWhitHook } from './02-useEffect/TrafficLightWhitHook';
 // import { PokemonPage } from './03-examples/PokemonPage';
@@ -23,6 +24,7 @@ createRoot(document.getElementById("root")!).render(
     {/*<TasksApp />*/}
     {/* <ScrambleWords /> */}
     {/* <MemoHook /> */}
-    <MemoCounter />
+    {/* <MemoCounter /> */}
+    <InstagromApp />
   </StrictMode>,
 );
